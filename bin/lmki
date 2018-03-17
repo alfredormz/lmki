@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+require 'terminal-notifier'
+
+help = <<EOS
+LMKI(1)
+
+NAME
+      lmki -- Simple command-line timer for MacOS
+
+SYNOPSIS
+
+      lmki NUMBER[SUFFIX] MESSAGE
+
+DESCRIPTION
+      Provide a minimalist countdown timer inside your command-line terminal. Send a macOS notification with MESSAGE after NUMBER minutes.
+
+      SUFFIX may be "s" for seconds,
+             "m" for minutes (the default),
+             "h" for hours, or
+             "d" for days
+
+EXAMPLE
+
+      lmki 5m 'Please, check the eggs.'
+
+EOS
+
+unless ARGV[0]
+  puts help
+  exit 1
+end
+
+case ARGV[0]
+when "help" then puts help
+else
+  period_input = ARGV[0].match(/\d+(s|m|h|d)?/)
+
+  unless period_input
+    STDERR.puts "Wrong amount of time"
+    exit 1
+  end
+
+  period = case period_input.captures.compact.first
+    when "s" then 1
+    when "h" then 3600  # 60 * 60
+    when "d" then 86400 # 60 * 60 * 24
+    else
+      60
+    end
+
+  time    = ARGV[0].to_f * period
+  message = ARGV[1] || "Hey! Time's up."
+
+  Process.daemon
+
+  sleep time
+
+  TerminalNotifier.notify(
+    message,
+    title: "lkmi",
+  )
+end
