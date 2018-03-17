@@ -21,9 +21,9 @@ After NUMBER amount of time sends a macOS notification with MESSAGE. SUFFIX may 
 ### Examples
 
 ```
-lkmi 5   'Please, check the eggs'
-lkmi 25m 'Get away from the computer'
-lkmi 1h  'Call the plumber'
+lmki 5   'Please, check the eggs'
+lmki 25m 'Get away from the computer'
+lmki 1h  'Call the plumber'
 ```
 
 ## License
