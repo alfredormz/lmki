@@ -1,6 +1,6 @@
 # LMKI - Let Me Know In
 
-Provides a minimalist timer inside the command-line terminal and send a macOS notification when the time's up.
+Provides a minimalist timer inside the command-line terminal that sends a macOS notification when the time's up.
 
 ## Installing
 
